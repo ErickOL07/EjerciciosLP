@@ -1,0 +1,57 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compilar Haskell",
+      "type": "shell",
+      "command": "ghc",
+      "args": [
+        "C:\\Users\\erick\\OneDrive\\Documentos\\ULima\\2025-0\\LENGUA~1\\Repaso\\Examen 1\\Haskell\\${fileBasenameNoExtension}.hs"
+      ],
+      "problemMatcher": [],
+      "detail": "Compila el archivo Haskell actual"
+    },
+    {
+      "label": "Ejecutar Haskell en CMD",
+      "type": "shell",
+      "dependsOn": "Compilar Haskell",
+      "command": "cmd",
+      "args": [
+        "/c",
+        "start",
+        "cmd",
+        "/k",
+        "C:\\Users\\erick\\OneDrive\\Documentos\\ULima\\2025-0\\LENGUA~1\\Repaso\\Examen 1\\Haskell\\${fileBasenameNoExtension}.exe"
+      ],
+      "problemMatcher": [],
+      "detail": "Ejecuta el programa Haskell compilado en una ventana de CMD separada"
+    },
+    {
+      "label": "Limpiar archivos Haskell",
+      "type": "shell",
+      "dependsOn": "Ejecutar Haskell en CMD",
+      "command": "powershell",
+      "args": [
+        "-Command",
+        "Remove-Item -Force -ErrorAction Ignore \"C:\\Users\\erick\\OneDrive\\Documentos\\ULima\\2025-0\\LENGUA~1\\Repaso\\Examen 1\\Haskell\\${fileBasenameNoExtension}.exe\"; Remove-Item -Force -ErrorAction Ignore \"C:\\Users\\erick\\OneDrive\\Documentos\\ULima\\2025-0\\LENGUA~1\\Repaso\\Examen 1\\Haskell\\${fileBasenameNoExtension}.hi\"; Remove-Item -Force -ErrorAction Ignore \"C:\\Users\\erick\\OneDrive\\Documentos\\ULima\\2025-0\\LENGUA~1\\Repaso\\Examen 1\\Haskell\\${fileBasenameNoExtension}.o\""
+      ],
+      "problemMatcher": [],
+      "detail": "Elimina los archivos generados por GHC"
+    },
+    {
+      "label": "Compilar, Ejecutar y Limpiar Haskell en CMD",
+      "type": "shell",
+      "dependsOn": [
+        "Compilar Haskell",
+        "Ejecutar Haskell en CMD",
+        "Limpiar archivos Haskell"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "detail": "Compila, ejecuta en CMD y limpia los archivos generados por GHC"
+    }
+  ]
+}
