@@ -27,3 +27,43 @@ En caso de existir object slicing modificar su función funcA de tal manera que
 reciba un puntero a un objeto de la clase padre. Observe sus resultados.
 """
 
+class Padre:
+    def __init__(self, a):
+        self._a = a  # Cambio de __a a _a para evitar problemas de acceso
+
+    def imprimir(self):
+        print(f'Valor de "a": {self._a}')
+
+class Hija(Padre):
+    def __init__(self, a, c, d):
+        super().__init__(a)
+        self._c = c
+        self._d = d
+
+    def imprimir(self):
+        print(f'Valor de "a" (heredado): {self._a}')
+        print(f'Valor de "c": {self._c}')
+        print(f'Valor de "d": {self._d}')
+
+def funcA(objPadre):
+    objPadre.imprimir()
+
+def main():
+    padre = Padre('ValorA_Padre')
+    hija = Hija('ValorA_Hija', 'ValorC_Hija', 'ValorD_Hija')
+
+    print("Función imprimir:")
+    print(" - Padre:")
+    padre.imprimir()
+    print(" - Hija:")
+    hija.imprimir()
+
+    print("\nFunción funcA:")
+    print(" - Enviando objeto Padre a funcA:")
+    funcA(padre)
+    
+    print(" - Enviando objeto Hija a funcA:")
+    funcA(hija)  # Se usa polimorfismo, debe imprimir los valores de Hija
+
+if __name__ == "__main__":
+    main()

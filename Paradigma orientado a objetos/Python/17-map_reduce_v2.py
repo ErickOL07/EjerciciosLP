@@ -9,18 +9,8 @@ import time
 
 
 def contarPalabras(texto):
-    palabras = 0
-    palabra = False
-    asciiC = [chr(j) for j in range(65, 91)] + [chr(k) for k in range(97, 123)] + [l for l in "áéíóúüñÁÉÍÓÚÜÑàèìòùÀÈÌÒÙâêîôûÂÊÎÔÛãõÃÕäëïöüÄËÏÖÜåÅæÆçÇðÐøØœŒßÞþśŚłŁžŽšŠćĆčČđĐğĞıİńŃřŘťŤůŮýÝžŽ"]
-    for i in range(len(texto)):
-        if texto[i] in asciiC and palabra == False:
-            palabra = True
-            palabras += 1
-        elif texto[i] in asciiC and palabra == True:
-            pass
-        else:
-            palabra = False
-    return palabras
+    palabras = texto.split()
+    return len(palabras)
 
 # Función de mapeo: Tokeniza el texto y cuenta palabras en cada fragmento
 def map_function(text_fragment):
